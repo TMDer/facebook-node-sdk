@@ -250,7 +250,7 @@
                 isOAuthRequest = /^oauth.*/.test('oauth/');
             }
             else if(domain == 'api') {
-                uri = 'https://api.facebook.com/' + path;
+                uri = 'https://graph.facebook.com/v2.2/' + path;
             }
             else if(domain == 'api_read') {
                 uri = 'https://api-read.facebook.com/' + path;
@@ -267,7 +267,7 @@
                     }
                     uri += 'access_token=' + encodeURIComponent(params.access_token);
                     delete params['access_token'];
-                    
+
                     if(params.appsecret_proof) {
                         uri += '&appsecret_proof=' + encodeURIComponent(params.appsecret_proof);
                         delete params['appsecret_proof'];
@@ -303,7 +303,7 @@
                 }
                 uri = uri.substring(0, uri.length -1);
             };
-            
+
             pool = { maxSockets : options('maxSockets') || Number(process.env.MAX_SOCKETS) || 5 };
             requestOptions = {
                   method: method
@@ -386,7 +386,7 @@
         setAccessToken = function (accessToken) {
             options({'accessToken': accessToken});
         };
-        
+
         getAppSecretProof = function (accessToken, appSecret) {
             var hmac = crypto.createHmac('sha256', appSecret);
             hmac.update(accessToken);
@@ -488,7 +488,7 @@
                             // ping Facebook for instrumentation requirement
                             pingFacebook(opts[key]);
                             break;
-                        
+
                         case 'appSecret':
                         case 'accessToken':
                             opts.appSecretProof =
@@ -651,7 +651,7 @@
                 if(options('proxy')) {
                     requestOptions['proxy'] = options('proxy');
                 }
-			
+
                 request(
                     requestOptions
                     , function(error, response, body) {
