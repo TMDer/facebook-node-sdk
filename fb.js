@@ -22,6 +22,7 @@
             , log
             , has
             , options
+            , requestPath
             , METHODS = ['get', 'post', 'delete', 'put']
             , opts = {
                   'accessToken': null
@@ -186,6 +187,7 @@
 
             // remove prefix slash if one is given, as it's already in the base url
             if(path[0] === '/') {
+                requestPath = path;
                 path = path.substr(1);
             }
 
@@ -333,6 +335,9 @@
                     var json;
                     try {
                         json = JSON.parse(body);
+                        if (json.error) {
+                          json.error.path = requestPath;
+                        }
                     } catch (ex) {
                       // sometimes FB is has API errors that return HTML and a message
                       // of "Sorry, something went wrong". These are infrequent and unpredictable but
