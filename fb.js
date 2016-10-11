@@ -248,11 +248,11 @@
             }
 
             if(domain === 'graph') {
-                uri = 'https://graph.facebook.com/v2.6/' + path;
+                uri = 'https://graph.facebook.com/v2.7/' + path;
                 isOAuthRequest = /^oauth.*/.test('oauth/');
             }
             else if(domain == 'api') {
-                uri = 'https://graph.facebook.com/v2.6/' + path;
+                uri = 'https://graph.facebook.com/v2.7/' + path;
             }
             else if(domain == 'api_read') {
                 uri = 'https://api-read.facebook.com/' + path;
